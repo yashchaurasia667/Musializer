@@ -5,4 +5,12 @@ LIBFLAGS = -lglfw -lGL
 default: main
 
 main: main.c
-	$(CC) $(CFLAGS) -o main main.c $(LIBFLAGS)
+	mkdir -p build
+	$(CC) $(CFLAGS) -o build/main main.c $(LIBFLAGS)
+	./build/main
+
+windows: main.c
+	$(CC) $(CFLAGS) -o build/main main.c -IGLFW -LGLFW .\GLFW\glfw3.dll -lopengl32 -lgdi32 -lglfw3
+
+clean:
+	rm -rf build
