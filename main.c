@@ -1,23 +1,27 @@
 #include <stdio.h>
-#include <GLFW/glfw3.h>
+#include <raylib.h>
 
-int main()
+#define WINW 800
+#define WINH 600
+#define FPS 60
+
+int main(void)
 {
-  glfwInit();
-  GLFWwindow *window = glfwCreateWindow(1280, 720, "Todo", NULL, NULL);
-  glfwMakeContextCurrent(window);
+  InitWindow(WINW, WINH, "Musializer");
+  SetTargetFPS(FPS);
 
-  while (!glfwWindowShouldClose(window))
+  InitAudioDevice();
+  Music music = LoadMusicStream("Valentine.ogg");
+  PlayMusicStream(music);
+
+  while (!WindowShouldClose())
   {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    UpdateMusicStream(music);
 
-    glfwPollEvents();
-    glfwSwapBuffers(window);
+    BeginDrawing();
+    ClearBackground(RED);
+    EndDrawing();
   }
-
-  glfwDestroyWindow(window);
-  glfwTerminate();
 
   return 0;
 }
