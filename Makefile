@@ -3,14 +3,17 @@ CFLAGS= -Wall -Wextra
 LIBS = -lraylib -lglfw -ldl -lpthread	
 DEPENDENCIES=
 
-default: musializer
+SRC_DIR=src
+BUILD_DIR=build
 
-musializer: main.c
-	mkdir -p build
-	$(CC) $(CFLAGS) -o build/musializer $(DEPENDENCIES) main.c $(LIBS)
+default: $(BUILD_DIR)/musializer
 
-clean: build
-	rm -rf build
+$(BUILD_DIR)/musializer: $(SRC_DIR)/main.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $@ $(DEPENDENCIES) $< $(LIBS)
 
-run: build/musializer
-	build/musializer
+clean: $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
+
+run: $(BUILD_DIR)/musializer
+	$(BUILD_DIR)/musializer
