@@ -7,6 +7,12 @@ SRC_DIR=src
 BUILD_DIR=build
 
 default: $(BUILD_DIR)/musializer
+# default: $(BUILD_DIR)/test
+
+$(BUILD_DIR)/test: $(SRC_DIR)/test.c
+	mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $@ $(DEPENDENCIES) $< $(LIBS)
+	$(BUILD_DIR)/test
 
 $(BUILD_DIR)/musializer: $(SRC_DIR)/main.c
 	mkdir -p $(BUILD_DIR)

@@ -26,12 +26,15 @@ void callback(void *bufferData, unsigned int frames)
 
 int main(void)
 {
+  /*------------------Initialization-------------------------*/
+
   float volume = 1.0f;
   InitWindow(WINW, WINH, "Musializer");
   SetTargetFPS(FPS);
 
   InitAudioDevice();
-  Music music = LoadMusicStream("Valentine.ogg");
+  Music music = LoadMusicStream("src/Valentine.ogg");
+
   assert(music.stream.sampleSize == 16);
   assert(music.stream.channels == 2);
   printf("music.frameCount = %u\n", music.frameCount);
